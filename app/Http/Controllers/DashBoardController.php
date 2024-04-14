@@ -10,4 +10,8 @@ class DashBoardController extends Controller
     public function index(){
         return view('dashboard.index');
     }
+    
+    public function add(){
+        return "USER HSHS";
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\VarDumper\Caster\RedisCaster;
@@ -21,7 +22,6 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]); 
-
         $email = $request->email;
  
         if (Auth::attempt($credentials)) {

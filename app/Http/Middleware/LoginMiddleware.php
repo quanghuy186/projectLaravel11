@@ -2,14 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\Caster\RedisCaster;
+use Illuminate\Support\Facades\Auth;
 
-class CheckRole
+class LoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,9 +16,8 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-        if($user->role->name == 'user'){
-            return redirect()->route('user');
+        if(Auth::id() > 0){
+            return redirect()->route('dashboard.index');
         }
         return $next($request);
     }
