@@ -18,10 +18,15 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-        if($user->role->name == 'user'){
-            return redirect()->route('user');
-        }
+        // if(Auth::check()){
+            $user = Auth::user();
+            if($user->role->name == 'user'){
+                return redirect()->route('user');
+            }
+        // }else{
+        //     return redirect()->route('auth.login');
+        // }
+        
         return $next($request);
     }
 }

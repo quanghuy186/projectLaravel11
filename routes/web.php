@@ -1,20 +1,29 @@
 <?php
 
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashBoardController;
 use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthenticateMiddleware;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Routing\Router;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('auth.login')->middleware('login');
 Route::get('register', [AuthController::class, 'register'])->name('auth.register');
 Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
-Route::get('dashboard', [DashBoardController::class, 'index'])->name('dashboard.index')->middleware(['auth', 'checkRole']);
-Route::get('user', [DashBoardController::class, 'add'])->name('user');
+// Route::get('dashboard', [DashBoardController::class, 'index'])->name('dashboard.index')->middleware('auth', 'checkRole');
+Route::get('product', [ProductController::class, 'index'])->name('user');
+
+Route::middleware('auth')->group(function(){
+    Route::get('dashboard', [DashBoardController::class, 'index'])->name('dashboard.index')->middleware('checkRole');
+    //danh sach
+});
+Route::get('admin/user/index', [UserController::class, 'index'])->name('admin.user.index');
+Route::get('admin/user/add', [UserController::class, 'add'])->name('admin.user.add');
