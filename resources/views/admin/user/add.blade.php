@@ -8,30 +8,51 @@
             Thêm người dùng
         </div>
         <div class="card-body">
-            <form>
+            <form method="POST" action="{{ route('admin.user.store') }}">
+                @csrf
                 <div class="form-group">
                     <label for="name">Họ và tên</label>
                     <input class="form-control" type="text" name="name" id="name">
                 </div>
+                @error('name')
+                     <div class="alert alert-danger mb-3">{{ $message }}</div>
+                @enderror 
+
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input class="form-control" type="text" name="email" id="email">
                 </div>
+                @error('email')
+                     <div class="alert alert-danger mb-3">{{ $message }}</div>
+                @enderror                             
+
                 <div class="form-group">
-                    <label for="email">Mật khẩu</label>
-                    <input class="form-control" type="password" name="email" id="email">
+                    <label for="password">Mật khẩu</label>
+                    <input class="form-control" type="password" name="password" id="password">
                 </div>
+                @error('password')
+                     <div class="alert alert-danger mb-3">{{ $message }}</div>
+                @enderror 
+
+                <div class="form-group">
+                    <label for="cpassword">Nhập lại mật khẩu</label>
+                    <input class="form-control" type="password" name="cpassword" id="cpassword">
+                </div>
+                @error('password')
+                     <div class="alert alert-danger mb-3">{{ $message }}</div>
+                @enderror 
 
                 <div class="form-group">
                     <label for="">Nhóm quyền</label>
-                    <select class="form-control" id="">
-                        <option>Chọn quyền</option>
-                        <option>Danh mục 1</option>
-                        <option>Danh mục 2</option>
-                        <option>Danh mục 3</option>
-                        <option>Danh mục 4</option>
+                    <select class="form-control" id="role_id" name="role_id">
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach  
                     </select>
                 </div>
+                @error('role_id')
+                        <div class="alert alert-danger mb-3">{{ $message }}</div>
+                @enderror 
 
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
                 <a class="btn btn-primary" href="{{ route('admin.user.index') }}">

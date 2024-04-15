@@ -23,7 +23,8 @@ Route::get('product', [ProductController::class, 'index'])->name('user');
 
 Route::middleware('auth')->group(function(){
     Route::get('dashboard', [DashBoardController::class, 'index'])->name('dashboard.index')->middleware('checkRole');
-    //danh sach
-});
-Route::get('admin/user/index', [UserController::class, 'index'])->name('admin.user.index');
-Route::get('admin/user/add', [UserController::class, 'add'])->name('admin.user.add');
+    
+    Route::get('admin/user/index', [UserController::class, 'index'])->name('admin.user.index');
+    Route::get('admin/user/add', [UserController::class, 'add'])->name('admin.user.add');
+    Route::post('admin/user/add', [UserController::class, 'store'])->name('admin.user.store');
+}); 

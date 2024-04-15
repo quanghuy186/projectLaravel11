@@ -8,8 +8,8 @@
             <h5 class="m-0 ">Danh sách thành viên</h5>
             <div class="form-search form-inline">
                 <form>
-                    <input name="keyword" type="text" class="form-control form-search btn-sm" placeholder="Tìm kiếm">
-                    <input type="submit" name="btn-search" value="Tìm kiếm" class="btn btn-primary btn-sm">
+                    <input value="{{ $keyword }}" name="keyword" type="text" class="form-control form-search btn-sm" placeholder="Tìm kiếm">
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary btn-sm">
                 </form>
             </div>
         </div>
@@ -35,7 +35,6 @@
                         </th>
                         <th scope="col">#</th>
                         <th scope="col">Họ tên</th>
-                       
                         <th scope="col">Email</th>
                         <th scope="col">Quyền</th>
                         <th scope="col">Ngày tạo</th>
@@ -51,7 +50,6 @@
                                 </td>
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
-                            
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role->name }}</td>
                                 <td>{{ $user->created_at }}</td>
@@ -63,7 +61,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="7">Không tìm thấy bản ghi nào có tên là</td>
+                            <td class="bg-white" colspan="7">Không tìm thấy bản ghi nào có tên là {{ $keyword }}</td>
                         </tr>
                     @endif
                     

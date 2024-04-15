@@ -22,10 +22,11 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]); 
-        $email = $request->email;
+        // $email = $request->email;
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            session()->put('email', $email);
+            // session()->put('email', $email);
+            echo "ahah";
             return redirect()->route('dashboard.index')->with('success', 'Login success');
         }
         return redirect()->route('auth.login')->with('error', 'Thông tin hoặc mật khẩu không chính xác');
