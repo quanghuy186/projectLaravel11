@@ -20,12 +20,12 @@
             </div>
             <form action="{{ route('admin.user.action') }}">
                 <div class="form-action form-inline py-3">
-                    <select class="form-control mr-1" id="">
+                    <select class="form-control mr-1" name="action" id="">
                         <option>Chọn</option>
-                        <option>Xóa</option>
-                        <option>Khôi phục</option>
+                        <option value="delete">Xóa</option>
+                        <option value="restore">Khôi phục</option>
                     </select>
-                    <input type="submit" name="btn-search" value="Áp dụng" class="btn btn-primary">
+                    <input type="submit" class="btn btn-primary">
                 </div>
                 <table class="table table-striped tabl e-checkall">
                     <thead>

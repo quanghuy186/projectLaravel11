@@ -40,12 +40,6 @@ class UserController extends Controller
             'password' => 'required',
             'role_id' => 'required'
         ]);
-        // $user = new User();
-        // $user->name = $validatedData['name'];
-        // $user->email = $validatedData['email'];
-        // $user->password = bcrypt($validatedData['password']);
-        // $user->role_id = $validatedData['role_id']; // Gán giá trị role_id từ request
-        // $user->save();
         $user = User::create($validatedData);
         return redirect()->route('admin.user.index')->with('success', 'Thêm mới thành công người dùng');
     }
@@ -57,5 +51,30 @@ class UserController extends Controller
             $user = User::find($id);
             $user->delete();
             return redirect()->route('admin.user.index')->with('success', 'Thành công');
+    }
+
+    public function action(Request $request){
+        $list_check = $request->input('list_check');  
+        if($list_check){
+            foreach($list_check as $key => $id){
+                if(Auth::id() == $id){
+                    unset($list_check[$key]);
+                }
+            }
+            
+            if(!empty($list_check)){
+                $action = $request->input('action');
+                if($action == 'delete'){
+                    User::destroy($list_check);
+                    return redirect()->route('admin.user.index')->with('success', 'Đã vô hiệu hóa tài khoản thành công');
+                }
+
+                if($action == 'restore'){
+                    User::withTrashed()->whereIn('id', $list_check)->restore();
+                    return redirect()->route('admin.user.index')->with('success', "Khôi phục tài khoản thành công");
+                }
+            }
+        }     
+        return redirect()->route('admin.user.index')->with('error', "Không thể thực hiện thao tác này!");
     }
 }
