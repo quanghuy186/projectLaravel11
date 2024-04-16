@@ -7,16 +7,25 @@ use App\Http\Requests\ValidateRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index(Request $request){
-        $keyword = '';
-        if($request->input('keyword')){
-            $keyword = $request->input('keyword');
+        $status = $request->input('status');
+            $keyword = '';
+        if($status == 'trash'){
+            $users = User::onlyTrashed()->paginate(2);
+        }else{
+            if($request->input('keyword')){
+                $keyword = $request->input('keyword');
+            }
+            $users = User::where('name', 'LIKE', "%{$keyword}%")->orderBy('created_at', 'desc')->paginate(5);
         }
-        $users = User::where('name', 'LIKE', "%{$keyword}%")->orderBy('created_at', 'desc')->paginate(5);
-        return view('admin.user.index', compact('users', 'keyword'));
+        $count_user_activity = User::count();
+        $count_user_trash = User::onlyTrashed()->count();
+        
+        return view('admin.user.index', compact('users', 'keyword', 'request', 'count_user_activity', 'count_user_trash'));
     }
 
     public function add(){
@@ -39,5 +48,14 @@ class UserController extends Controller
         // $user->save();
         $user = User::create($validatedData);
         return redirect()->route('admin.user.index')->with('success', 'Thêm mới thành công người dùng');
+    }
+
+    public function delete(string $id){
+            if(Auth::id() == $id){
+                 return redirect()->route('admin.user.index')->with('error', 'Bạn không thể xóa');    
+            }
+            $user = User::find($id);
+            $user->delete();
+            return redirect()->route('admin.user.index')->with('success', 'Thành công');
     }
 }

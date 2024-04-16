@@ -15,58 +15,90 @@
         </div>
         <div class="card-body">
             <div class="analytic">
-                <a href="" class="text-primary">Trạng thái 1<span class="text-muted">(10)</span></a>
-                <a href="" class="text-primary">Trạng thái 2<span class="text-muted">(5)</span></a>
-                <a href="" class="text-primary">Trạng thái 3<span class="text-muted">(20)</span></a>
+                <a href="{{ $request->fullUrlWithQuery(['status' => 'trash']); }}" class="text-primary">Tài khoản vô hiệu hóa<span class="text-muted">{{ $count_user_trash }}</span></a>
+                <a href="{{ $request->fullUrlWithQuery(['status' => 'activity']); }}" class="text-primary">Tài khoản đang hoạt động<span class="text-muted">{{ $count_user_activity }}</span></a>
             </div>
-            <div class="form-action form-inline py-3">
-                <select class="form-control mr-1" id="">
-                    <option>Chọn</option>
-                    <option>Tác vụ 1</option>
-                    <option>Tác vụ 2</option>
-                </select>
-                <input type="submit" name="btn-search" value="Áp dụng" class="btn btn-primary">
-            </div>
-            <table class="table table-striped table-checkall">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="checkall">
-                        </th>
-                        <th scope="col">#</th>
-                        <th scope="col">Họ tên</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Quyền</th>
-                        <th scope="col">Ngày tạo</th>
-                        <th scope="col">Tác vụ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($users->total() > 0)
-                        @foreach ($users as $user)
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->role->name }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @else
+            <form action="{{ route('admin.user.action') }}">
+                <div class="form-action form-inline py-3">
+                    <select class="form-control mr-1" id="">
+                        <option>Chọn</option>
+                        <option>Xóa</option>
+                        <option>Khôi phục</option>
+                    </select>
+                    <input type="submit" name="btn-search" value="Áp dụng" class="btn btn-primary">
+                </div>
+                <table class="table table-striped tabl e-checkall">
+                    <thead>
                         <tr>
-                            <td class="bg-white" colspan="7">Không tìm thấy bản ghi nào có tên là {{ $keyword }}</td>
+                            <th>
+                                <input type="checkbox" name="checkall">
+                            </th>
+                            <th scope="col">#</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Quyền</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Tác vụ</th>
                         </tr>
-                    @endif
-                    
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @if ($users->total() > 0)
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="list_check[]" value="{{ $user->id }}">
+                                    </td>
+                                    <th scope="row">{{ $user->id }}</th>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role->name }}</td>
+                                    <td>{{ $user->created_at }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                                        @if (Auth::id() != $user->id)
+                                          <!-- Button trigger modal -->
+                                            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                                                <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+    
+                                            </button>
+    
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn có chắc chắn không?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                    
+                                                    
+                                                    <a class="btn btn-primary" href="{{ route('admin.user.delete', $user->id) }}">Đồng ý</a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+    
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td class="bg-white" colspan="7">Không tìm thấy bản ghi nào có tên là {{ $keyword }}</td>
+                            </tr>
+                        @endif
+                        
+                    </tbody>
+                </table>
+            </form>
+
+
             {{ $users->links() }}
         </div>
     </div>
