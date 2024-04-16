@@ -19,14 +19,25 @@
                 <a href="{{ $request->fullUrlWithQuery(['status' => 'activity']); }}" class="text-primary">Tài khoản đang hoạt động<span class="text-muted">{{ $count_user_activity }}</span></a>
             </div>
             <form action="{{ route('admin.user.action') }}">
-                <div class="form-action form-inline py-3">
-                    <select class="form-control mr-1" name="action" id="">
-                        <option>Chọn</option>
-                        <option value="delete">Xóa</option>
-                        <option value="restore">Khôi phục</option>
-                    </select>
-                    <input type="submit" class="btn btn-primary">
-                </div>
+                @if ($request->input('status') == 'activity')
+                    <div class="form-action form-inline py-3">
+                        <select class="form-control mr-1" name="action" id="">
+                            <option>Chọn</option>
+                            <option value="delete">Vô hiệu hóa</option>
+                            <option value="forceDelete">Vinh vieen</option>
+                        </select>
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                @else
+                    <div class="form-action form-inline py-3">
+                        <select class="form-control mr-1" name="action" id="">
+                            <option>Chọn</option>
+                            <option value="restore">Khôi phục</option>
+                        </select>
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                @endif
+                
                 <table class="table table-striped tabl e-checkall">
                     <thead>
                         <tr>

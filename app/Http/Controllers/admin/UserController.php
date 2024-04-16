@@ -73,6 +73,11 @@ class UserController extends Controller
                     User::withTrashed()->whereIn('id', $list_check)->restore();
                     return redirect()->route('admin.user.index')->with('success', "Khôi phục tài khoản thành công");
                 }
+
+                if($action == 'forceDelete'){
+                    User::withTrashed()->whereIn('id', $list_check)->forceDelete();
+                    return redirect()->route('admin.user.index')->with('success', "thành công");
+                }
             }
         }     
         return redirect()->route('admin.user.index')->with('error', "Không thể thực hiện thao tác này!");
