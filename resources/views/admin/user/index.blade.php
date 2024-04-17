@@ -65,7 +65,7 @@
                                     <td>{{ $user->role->name }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
                                         @if (Auth::id() != $user->id)
                                           <!-- Button trigger modal -->
                                             <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">

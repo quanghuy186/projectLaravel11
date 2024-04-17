@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class UserController extends Controller
 {
@@ -51,6 +52,29 @@ class UserController extends Controller
             $user = User::find($id);
             $user->delete();
             return redirect()->route('admin.user.index')->with('success', 'Thành công');
+    }
+
+    public function edit($id){
+        $roles = Role::all();
+        $user = User::find($id);
+        return view('admin.user.edit', compact('user', 'roles'));
+    }
+
+    public function update(Request $request,string $id){
+        if (Auth::id() == $id) {
+             return redirect()->route('admin.user.index')->with('error', 'Không thể sửa thông tin của chính bạn');
+        } else {
+            $user = User::find($id);
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'password' => 'required',
+                'role_id' => 'required'
+            ]);
+            $user->update($validatedData);
+            return redirect()->route('admin.user.index')->with('success', 'Thành công');
+        }
+        
+        
     }
 
     public function action(Request $request){
