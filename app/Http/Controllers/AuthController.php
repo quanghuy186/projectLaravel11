@@ -26,7 +26,6 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             // session()->put('email', $email);
-            echo "ahah";
             return redirect()->route('dashboard.index')->with('success', 'Login success');
         }
         return redirect()->route('auth.login')->with('error', 'Thông tin hoặc mật khẩu không chính xác');
@@ -36,8 +35,25 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-     
         return redirect()->route('auth.login');
+    }
+
+    public function register(){
+        return view('auth.register');
+    }
+
+    public function store(Request $request){
+        $acount = new User();
         
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'cpassword' => 'required|same:password',
+        ]);
+
+        $validated['role_id'] = 1;
+        $acount->create($validated);
+        return redirect()->route('auth.login')->with('success', "Đăng ký tài khoản thành công!");
     }
 }

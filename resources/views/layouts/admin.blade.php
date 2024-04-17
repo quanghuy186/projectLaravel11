@@ -50,7 +50,7 @@
         <div id="page-body" class="d-flex">
             <div id="sidebar" class="bg-white">
                 <ul id="sidebar-menu">
-                    <li class="nav-link">
+                    <li class="nav-link" id="dashBoard">
                         <a href="{{ route('dashboard.index') }}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -87,7 +87,7 @@
                             <li><a href="?view=cat">Danh mục</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link active">
+                    <li class="nav-link">
                         <a href="?view=list-product">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -135,8 +135,18 @@
             </div>
         </div>
 
-
     </div>
+
+    <script>
+        document.getElementById("dashBoard").addEventListener("click", function() {
+        var navLinks = document.getElementsByClassName("nav-link");
+            for (var i = 0; i < navLinks.length; i++) {
+                navLinks[i].classList.remove("active");
+            }
+            this.classList.add("active");
+        });
+
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ asset('js/app2.js') }}"></script>

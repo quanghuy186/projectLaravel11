@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-8">
                         <a href="cart.html" class="py-2 d-block float-right text-danger">Giỏ hàng<span class="text-success">(5)</span></a>
-
+                        <a href="{{ route('auth.login') }}" class="py-2 mx-3 d-block float-right text-danger">Đăng nhập</a>
                         <div class="btn-groups">
                             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
