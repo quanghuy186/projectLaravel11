@@ -9,10 +9,9 @@ use App\Http\Middleware\AuthenticateMiddleware;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Routing\Router;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('auth.login')->middleware('login');
 Route::get('register', [AuthController::class, 'register'])->name('auth.register');

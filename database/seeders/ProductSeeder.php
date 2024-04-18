@@ -20,17 +20,18 @@ class ProductSeeder extends Seeder
         $names = ['Laptop ABC', 'Smartphone XYZ', 'Keyboard 123', 'Mouse 456', 'Headphones ZZZ'];
         $categories = ['máy tính', 'điện thoại', 'bàn phím', 'chuột', 'tai nghe'];
 
-        // Tạo 20 sản phẩm
         for ($i = 0; $i < 20; $i++) {
             $name = $faker->randomElement($names);
             $category = $faker->randomElement($categories);
             
+            $imageUrl = $faker->imageUrl($width = 640, $height = 480); // Tạo URL hình ảnh ngẫu nhiên
+        
             Product::create([
                 'name' => $name,
                 'description' => $faker->sentence(),
-                'url' => $faker->url(),
+                'url' => $imageUrl, // Sử dụng URL hình ảnh ngẫu nhiên
                 'price' => $faker->randomFloat(2, 100000, 30000000),
-                'quantity' => $faker->numberBetween(1, 100), // Số lượng sản phẩm từ 1 đến 100
+                'quantity' => $faker->numberBetween(1, 100),
                 'category_id' => Category::where('name', $category)->first()->id, // Lấy ID của danh mục tương ứng
             ]);
         }
