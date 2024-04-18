@@ -12,6 +12,7 @@ use Illuminate\Routing\Router;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('home.detail');
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('auth.login')->middleware('login');
 Route::get('register', [AuthController::class, 'register'])->name('auth.register');

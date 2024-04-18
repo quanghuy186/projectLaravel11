@@ -11,4 +11,13 @@ class HomeController extends Controller
         $products = Product::orderBy('created_at', 'desc')->paginate(8);
         return view('index', compact('products'));
     }
+
+    public function detail(string $id){
+        $product = Product::find($id);
+        return view('home.detail', compact('product'));
+    }
+
+    public function search(){
+        
+    }
 }
