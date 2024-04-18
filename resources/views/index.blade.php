@@ -10,13 +10,14 @@
                 <h2 class="mt-3">Sản phẩm dành cho bạn</h2>
                 <div class="list-product mt-3">
                   <div class="row">
-                    @foreach ($products as $product)
+                    @if ($products->total() > 0)
+                          @foreach ($products as $product)
                         <div class="col-md-3 col-sm-4 col-6 mb-3">
                       <div class="product-item border py-2">
                         <div class="product-thumb">
-                          <a href="">
+                          <a href="{{ route('home.detail', $product->id) }}">
                             <img
-                              class="img-fluid"
+                              class="img-fluid rounded-start" style="width:640px; height:120px"
                               src="{{ $product->url }}"
                               alt=""
                             />
@@ -42,6 +43,11 @@
                       </div>
                     </div>
                     @endforeach
+                    @else
+                      <div class="container">
+                        <p>Không tìm thây sản phẩm nào phù hợp</p>
+                      </div>
+                    @endif
                     
                   </div>
                 </div>

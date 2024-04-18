@@ -44,7 +44,7 @@
               <a class="nav-link" href="#">Giới thiệu</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Danh mục</a>
+              <a class="nav-link" href="#">Thể loại</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Sản phẩm</a>
@@ -53,12 +53,13 @@
               <a class="nav-link" href="#">Liên hệ</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <form  class="form-inline my-2 my-lg-0">
             <input
               class="form-control mr-sm-2"
               type="search"
               placeholder="Tìm kiếm"
               aria-label="Search"
+              name="keyword"
             />
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
               Tìm kiếm

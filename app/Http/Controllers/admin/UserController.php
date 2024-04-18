@@ -73,8 +73,6 @@ class UserController extends Controller
             $user->update($validatedData);
             return redirect()->route('admin.user.index')->with('success', 'Thành công');
         }
-        
-        
     }
 
     public function action(Request $request){
