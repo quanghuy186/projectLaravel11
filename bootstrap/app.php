@@ -3,6 +3,7 @@
 use App\Http\Middleware\AuthenticateMiddleware;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\LoginMiddleware;
+use App\Http\Middleware\Logout;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkRole' => CheckRole::class,
             'auth' => AuthenticateMiddleware::class,
             'login' => LoginMiddleware::class,
+            'logout' => Logout::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
       .logo img {
         width: 120px;
@@ -36,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ route('home.index') }}"
+              <a class="nav-link" href=""
                 >Trang chủ <span class="sr-only">(current)</span></a
               >
             </li>
@@ -48,17 +49,17 @@
                 Thể loại
               </a>
               <div class="dropdown-menu">
-                @foreach ($categories as $category)
+                {{-- @foreach ($categories as $category)
                   <form>
                     <input type="hidden"  value="{{ $category->id }}" name="search_category">
                     <button type="submit" class="dropdown-item">{{ $category->name }}</button>
                   </form>
-                @endforeach
+                @endforeach --}}
               </div>
 
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('home.index') }}">Sản phẩm</a>
+              <a class="nav-link" href="">Sản phẩm</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Liên hệ</a>
@@ -79,11 +80,13 @@
           </form>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link text-primary" href="{{ route('auth.login') }}">Đăng nhập</a>
-            </li>
+                <a class="nav-link text-primary" href="#"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a>
+              </li>
+
             <li class="nav-item">
-              <a class="nav-link text-primary" href="{{ route('auth.register') }}">Đăng ký</a>
+              <a class="nav-link text-primary" href="{{ route('auth.logout') }}">Đăng xuất</a>
             </li>
+            
           </ul>
         </div>
       </nav>

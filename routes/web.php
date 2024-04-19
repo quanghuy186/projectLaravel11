@@ -10,21 +10,28 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\user\CustomerController;
 
-Route::get('', [HomeController::class, 'index'])->name('home.index');
+//home index
+Route::get('', [HomeController::class, 'index'])->name('home.index')->middleware('logout');
+// Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+
+//detail Product
 Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('home.detail');
 
+//authentication
 Route::get('login', [AuthController::class, 'showLogin'])->name('auth.login')->middleware('login');
 Route::get('register', [AuthController::class, 'register'])->name('auth.register');
 Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
-
-Route::get('register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('register', [AuthController::class, 'store'])->name('auth.register');
+//end
 
 
+//Admin
 Route::middleware('auth')->group(function(){
-    Route::get('product', [ProductController::class, 'index'])->name('user');
+    Route::get('user/index', [CustomerController::class, 'index'])->name('user.index');
+
     Route::get('dashboard', [DashBoardController::class, 'index'])->name('dashboard.index')->middleware('checkRole');
     Route::get('admin/user/index', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('admin/user/add', [UserController::class, 'add'])->name('admin.user.add');

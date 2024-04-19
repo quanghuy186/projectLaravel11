@@ -2,14 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\Caster\RedisCaster;
 
-class CheckRole
+class Logout
 {
     /**
      * Handle an incoming request.
@@ -18,15 +16,9 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if(Auth::check()){
-            $user = Auth::user();
-            if($user->role->name == 'user'){
-                return redirect()->route('user.index');
-            }
-        // }else{
-        //     return redirect()->route('auth.login');
-        // }
-        
+        if(Auth::id() > 0){
+            return redirect()->route('user.index')->with('Bạn phải đăng xuất trước khi thực hiện');
+        }
         return $next($request);
     }
 }
