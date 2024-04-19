@@ -54,17 +54,41 @@
               </div>
             </div>
             {{ $products->links() }}
-
           </div>
         </div>
         <!-- end wp-content -->
-        <div id="footer" class="bg-secondary text-center text-warning mt-3">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">Do Quang Huy</div>
+       
+          <footer class="mt-5">
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col-md-4 text-white pt-3"  style="background-color:#B92424">
+                        <h4>Liên kết</h4>
+                        <ul class="text-white">
+                            <li><a  class="text-white" href="#">Trang chủ</a></li>
+                            <li><a  class="text-white" href="#">Sản phẩm</a></li>
+                            <li><a  class="text-white" href="#">Dịch vụ</a></li>
+                            <li><a  class="text-white" href="#">Giới thiệu</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 text-white pt-3" style="background-color:#B92424">
+                        <h4>Thông tin liên hệ</h4>
+                        <p>Địa chỉ: Số nhà 123, Đường ABC, Thành phố XYZ</p>
+                        <p>Email: contact@example.com</p>
+                        <p>Điện thoại: +123456789</p>
+                    </div>
+                    <div class="col-md-4 text-white pt-3" style="background-color:#B92424">
+                        <h4>Theo dõi chúng tôi</h4>
+                        <ul class="social-icons">
+                            <li><a class="text-white" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a class="text-white" href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a class="text-white" href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a class="text-white" href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
+        </footer>
+        
       </div>
     </div>
 

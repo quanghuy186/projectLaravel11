@@ -43,8 +43,15 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Giới thiệu</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Thể loại</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                Thể loại
+              </a>
+              <div class="dropdown-menu">
+                @foreach ($categories as $category)
+                  <a class="dropdown-item" href="#">{{ $category->name }}</a>
+                @endforeach
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Sản phẩm</a>
