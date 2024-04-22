@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\user\CustomerController;
+use App\Http\Controllers\user\CartController;
 
 //home index
 Route::get('', [HomeController::class, 'index'])->name('home.index')->middleware('logout');
@@ -42,3 +43,4 @@ Route::middleware('auth')->group(function(){
 
     Route::get('admin/user/action', [UserController::class, 'action'])->name('admin.user.action');
 }); 
+Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart.add');

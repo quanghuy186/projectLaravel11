@@ -77,6 +77,15 @@
           </form>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+              <a class="nav-link text-primary" href="#">Giỏ hàng
+                <i class="bi bi-bag"></i>
+                {{-- {{ $totalCart }} --}}
+                @yield('total')
+              </a>
+              
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link text-primary" href="#"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a>
               </li>
 

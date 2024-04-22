@@ -102,7 +102,14 @@
                                                 <span class="current-price text-danger">499.000đ</span>
                                                 <span class="old-price text-muted">680.000đ</span>
                                             </div>
-                                            <a href="" class="btn btn-outline-danger btn-sm mt-3" class="add-to-cart">Đặt Mua</a>
+                                            <form action="{{ route('cart.add') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="cart_id" value="{{ $cart->id }}">
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="number" name="quantity" value="1"> <!-- Số lượng sản phẩm -->
+                                                <button type="submit">Thêm vào giỏ hàng</button>
+                                            </form>
+                                            {{-- <a href="" class="btn btn-outline-danger btn-sm mt-3" class="add-to-cart">Đặt Mua</a> --}}
                                         </div>
                                     </div>
                                 </div>

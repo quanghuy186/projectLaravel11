@@ -1,5 +1,7 @@
 @extends('layouts.user')
 
+@section('total', $totalProductsInCart)
+
 @section('content')
 
   {{-- slibar --}}
@@ -59,14 +61,8 @@
 
   {{-- end slibar --}}
 <div class="container">
-   
-    
-    
-    
-
-
-
     <h2 class="mt-3">Sản phẩm dành cho bạn</h2>
+    <h1>Số lượng sản phẩm trong giỏ hàng: {{ $totalProductsInCart }}</h1>
     <div class="list-product mt-3">
       <div class="row">
         @if ($products->total() > 0)
@@ -98,12 +94,14 @@
                 class="add-to-cart"
                 >Chi tiết</a
               >
-              <a
-                href="{{ route('home.detail', $product->id) }}"
-                class="btn btn-outline-danger btn-sm mt-3"
-                class="add-to-cart"
-                >Đặt hàng</a
-              >
+              <form action="{{ route('cart.add') }}" method="POST" class="">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <div class="quantity-input">
+                    <input type="hidden" name="quantity" value="1" min="1">
+                </div>
+                <button type="submit" class="btn btn-outline-danger btn-sm mt-3">Thêm vào giỏ hàng</button>
+            </form>
             </div>
           </div>
         </div>
