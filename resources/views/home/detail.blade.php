@@ -1,4 +1,6 @@
-@extends('layouts.home')
+@extends('layouts.user')
+
+@section('total', $totalProductsInCart);
 
 @section('content')
     <div class="container">
@@ -13,6 +15,18 @@
                   <p class="card-text" class="text-body-secondary">Giá tiền : {{ $product->price }}đ</p>
                   <p class="card-text" class="text-body-secondary">Mô tả : {{ $product->description }}</p>
                   <p class="card-text" class="text-body-secondary">Số lượng còn lại : {{ $product->quantity }}</p>
+
+                  <form action="{{ route('cart.add') }}" method="POST" class="form-inline w-50">
+                    @csrf
+                    <label for="product_id">Số lượng</label>
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <div class="input-group mb-3">
+                        <input type="number" name="quantity" class="form-control" value="1" min="1">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-danger">Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </form>
                 </div>
               </div>
             </div>

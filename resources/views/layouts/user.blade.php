@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href=""
+              <a class="nav-link" href="{{ route('user.index') }}"
                 >Trang chủ <span class="sr-only">(current)</span></a
               >
             </li>
@@ -46,12 +46,12 @@
                 Thể loại
               </a>
               <div class="dropdown-menu">
-                {{-- @foreach ($categories as $category)
+                @foreach ($categories as $category)
                   <form>
                     <input type="hidden"  value="{{ $category->id }}" name="search_category">
                     <button type="submit" class="dropdown-item">{{ $category->name }}</button>
                   </form>
-                @endforeach --}}
+                @endforeach
               </div>
 
             </li>
@@ -77,7 +77,7 @@
           </form>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link text-primary" href="#">Giỏ hàng
+              <a class="nav-link text-primary" href="{{ route('cart.index') }}">Giỏ hàng
                 <i class="bi bi-bag"></i>
                 {{-- {{ $totalCart }} --}}
                 @yield('total')

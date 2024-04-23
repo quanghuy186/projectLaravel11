@@ -9,6 +9,10 @@ use App\Models\CartItem;
 
 class CartController extends Controller
 {
+    public function index(){
+        return view('user.cart.index');
+    }
+
     public function addToCart(Request $request)
     {
         // Lấy giỏ hàng của người dùng hoặc tạo mới nếu chưa có

@@ -28,7 +28,6 @@ Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('register', [AuthController::class, 'store'])->name('auth.register');
 //end
 
-
 //Admin
 Route::middleware('auth')->group(function(){
     Route::get('user/index', [CustomerController::class, 'index'])->name('user.index');
@@ -42,5 +41,7 @@ Route::middleware('auth')->group(function(){
     Route::put('admin/user/edit/{id}', [UserController::class, 'update'])->name('admin.user.update');
 
     Route::get('admin/user/action', [UserController::class, 'action'])->name('admin.user.action');
+    Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 }); 
-Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart.add');

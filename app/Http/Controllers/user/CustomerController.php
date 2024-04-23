@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -17,7 +18,13 @@ class CustomerController extends Controller
       $products = Product::orderBy('created_at', 'desc')->paginate(8);
       $keyword = '';
 
-      $totalProductsInCart = DB::table('cart_items')->sum('quantity');
+      $user = Auth::user();
+
+      if ($user && $user->cart) {
+          $totalProductsInCart = $user->cart->items()->count('quantity');
+      } else {
+          $totalProductsInCart = 0;
+      }
       
       if($request->input('keyword')){
           $keyword = $request->input('keyword');

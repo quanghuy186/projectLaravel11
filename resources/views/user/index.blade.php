@@ -62,7 +62,6 @@
   {{-- end slibar --}}
 <div class="container">
     <h2 class="mt-3">Sản phẩm dành cho bạn</h2>
-    <h1>Số lượng sản phẩm trong giỏ hàng: {{ $totalProductsInCart }}</h1>
     <div class="list-product mt-3">
       <div class="row">
         @if ($products->total() > 0)
