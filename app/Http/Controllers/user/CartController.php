@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function index(){
-        return view('user.cart.index');
+       // Lấy người dùng hiện tại đã đăng nhập
+    $user = Auth::user();
+    
+    // Lấy tất cả các mục trong giỏ hàng của người dùng hiện tại
+    $cartItems = $user->cart->items()->get();
+    
+    // Trả về view 'user.cart.index' với dữ liệu giỏ hàng
+    return view('user.cart.index', compact('cartItems'));
     }
 
     public function addToCart(Request $request)
