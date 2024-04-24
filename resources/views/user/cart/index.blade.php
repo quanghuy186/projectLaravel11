@@ -10,14 +10,22 @@
   <div class="container">
     <div class="row">
         @foreach ($cartItems as $item)
+        {{-- @dd($item) --}}
         <div class="col-md-6 offset-md-3 mt-5">
             <div class="card">
               <img style="" src="{{ asset('images/product-3.jpg') }}" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">Tên sản phẩm: Tên sản phẩm của bạn</h5>
-                <p class="card-text">Đơn giá: X đơn vị tiền</p>
+                <h5 class="card-title">{{$item->quantity }}</h5>
+                <p class="card-text">
+                  @if($item->product)
+                      {{ $item->product->name }}
+                      {{ $item['product']['id'] }}
+                  @else
+                      Sản phẩm không tồn tại
+                  @endif
+              </p>
                 <p class="card-text">Số lượng: 
-                    <input type="number" class="form-group">
+                    <input value="{{$item->quantity }}" type="number" class="form-group">
                 </p>
                 <p class="card-text">Mã sản phẩm: Mã sản phẩm của bạn</p>
                 <a href="#" class="btn btn-primary">Thanh toán</a>

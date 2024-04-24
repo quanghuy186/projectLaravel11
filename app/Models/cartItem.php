@@ -13,10 +13,10 @@ class CartItem extends Model
     protected $fillable = ['cart_id', 'product_id', 'quantity'];
 
     public function cart(){
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'cart_id');
     }
 
     public function product(){
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Cart::class, 'product_id');
     }
 }

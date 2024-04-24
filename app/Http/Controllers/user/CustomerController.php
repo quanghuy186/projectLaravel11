@@ -20,8 +20,8 @@ class CustomerController extends Controller
 
       $user = Auth::user();
 
-      if ($user && $user->cart) {
-          $totalProductsInCart = $user->cart->items()->count('quantity');
+      if ($user && $user->carts) {
+          $totalProductsInCart = $user->carts->cartItems()->count('quantity');
       } else {
           $totalProductsInCart = 0;
       }
