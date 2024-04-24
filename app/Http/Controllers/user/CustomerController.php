@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class CustomerController extends Controller
 {
@@ -19,13 +20,14 @@ class CustomerController extends Controller
       $keyword = '';
 
       $user = Auth::user();
-
-      if ($user && $user->carts) {
-          $totalProductsInCart = $user->carts->cartItems()->count('quantity');
-      } else {
-          $totalProductsInCart = 0;
-      }
-      
+        if ($user && $user->carts) {
+            $totalProductsInCart = 0;
+            foreach ($user->carts as $cart) {
+                $totalProductsInCart += $cart->cartItems()->count();
+            }
+        } else {
+            $totalProductsInCart = 0;
+        }
       if($request->input('keyword')){
           $keyword = $request->input('keyword');
           $products = Product::where('name', 'LIKE', "%{$keyword}%")->orderBy('created_at', 'desc')->paginate(8);

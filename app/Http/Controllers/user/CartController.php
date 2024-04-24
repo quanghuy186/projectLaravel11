@@ -12,7 +12,13 @@ class CartController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        $cartItems = $user->carts;
+        if ($user) {
+            // Lấy danh sách sản phẩm trong giỏ hàng của người dùng
+            $cartItems = $user->carts->flatMap(function ($cart) {
+                return $cart->cartItems;
+            });
+        }
+    
         return view('user.cart.index', compact('cartItems'));
     }
 

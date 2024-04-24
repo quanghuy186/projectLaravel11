@@ -10,13 +10,13 @@ use App\Models\Cart;
 class CartItem extends Model
 {
     use HasFactory;
-    protected $fillable = ['cart_id', 'product_id', 'quantity'];
+    protected $fillable = ['cart_id', 'product_id', 'quantity',];
 
     public function cart(){
-        return $this->belongsTo(Product::class, 'cart_id');
+        return $this->belongsTo(Cart::class, 'cart_id');
     }
 
     public function product(){
-        return $this->belongsTo(Cart::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

@@ -7,35 +7,38 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-        @foreach ($cartItems as $item)
-        {{-- @dd($item) --}}
-        <div class="col-md-6 offset-md-3 mt-5">
-            <div class="card">
-              <img style="" src="{{ asset('images/product-3.jpg') }}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{$item->quantity }}</h5>
-                <p class="card-text">
-                  @if($item->product)
-                      {{ $item->product->name }}
-                      {{ $item['product']['id'] }}
-                  @else
-                      Sản phẩm không tồn tại
-                  @endif
-              </p>
-                <p class="card-text">Số lượng: 
-                    <input value="{{$item->quantity }}" type="number" class="form-group">
-                </p>
-                <p class="card-text">Mã sản phẩm: Mã sản phẩm của bạn</p>
-                <a href="#" class="btn btn-primary">Thanh toán</a>
-              </div>
-            </div>
-          </div>
-        @endforeach
-    </div>
-  </div>
-
+  <table class="table container">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">Tên sản phẩm</th>
+        <th scope="col">Ảnh</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Số lượng trong kho</th>
+        <th scope="col">Số lượng đặt hàng</th>
+        <th scope="col">Thực hiện</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($cartItems as $cartItem)
+        <tr class="text-center">
+        <th  scope="row">{{ $cartItem->product->name }}</th>
+        <td style="padding: 5px;">
+            <img src="{{ $cartItem->product->url }}" alt="" style="width: 100px; height: 100px; object-fit: cover; border-radius: 5px;">
+        </td>
+        <td>{{ $cartItem->product->price }}đ</td>
+        <td>{{ $cartItem->product->quantity }}</td>
+        <td>
+          <input class="w-25" type="number" value="{{ $cartItem->quantity }}">
+        </td>
+        <td>
+          <a class="btn btn-success" href="">Đặt hàng</a>
+          <a class="btn btn-primary" href="">Xem đánh giá</a>
+          <a class="btn btn-danger" href="">Xóa</a>
+        </td>
+      </tr>
+      @endforeach
+      </tbody>
+  </table>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

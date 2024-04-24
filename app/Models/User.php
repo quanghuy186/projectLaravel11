@@ -21,6 +21,11 @@ class User extends Authenticatable
     public function carts() {
         return $this->hasMany(Cart::class);
     }
+
+    // public function cartItems()
+    // {
+    //     return $this->hasManyThrough(CartItem::class, Cart::class);
+    // }
     
     protected $fillable = [
         'name',
