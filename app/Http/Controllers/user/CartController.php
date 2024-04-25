@@ -34,4 +34,10 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
+
+    public function delete(string $id){
+        $cart = CartItem::find($id);
+        $cart->delete();
+        return redirect()->back()->with('success', 'deleted');
+    }
 }

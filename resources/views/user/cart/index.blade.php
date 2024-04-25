@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giỏ hàng</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+@extends('user.cart.component.header')
+
+@section('title', 'Giỏ hàng')
+
+@extends('user.cart.component.navbar')
+
+@section('content')
+
 <body>
-  <table class="table container">
+  <table class="table container mt-5">
     <thead>
       <tr class="text-center">
+        <th scope="col">#</th>
         <th scope="col">Tên sản phẩm</th>
         <th scope="col">Ảnh</th>
         <th scope="col">Giá</th>
@@ -21,6 +22,9 @@
     <tbody>
       @foreach ($cartItems as $cartItem)
         <tr class="text-center">
+        <th  scope="row">
+          <input type="checkbox" name="" id="">
+        </th>
         <th  scope="row">{{ $cartItem->product->name }}</th>
         <td style="padding: 5px;">
             <img src="{{ $cartItem->product->url }}" alt="" style="width: 100px; height: 100px; object-fit: cover; border-radius: 5px;">
@@ -33,14 +37,13 @@
         <td>
           <a class="btn btn-success" href="">Đặt hàng</a>
           <a class="btn btn-primary" href="">Xem đánh giá</a>
-          <a class="btn btn-danger" href="">Xóa</a>
+          <a href="{{ route('cart.delete', $cartItem->id) }}" class="btn btn-danger" href="">Xóa</a>
         </td>
       </tr>
       @endforeach
       </tbody>
   </table>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+@endsection
+
+@extends('user.cart.component.footer')

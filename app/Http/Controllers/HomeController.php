@@ -15,8 +15,11 @@ class HomeController extends Controller
         
         $user = Auth::user();
 
-        if ($user && $user->cart) {
-            $totalProductsInCart = $user->cart->items()->count('quantity');
+        if ($user && $user->carts) {
+            $totalProductsInCart = 0;
+            foreach ($user->carts as $cart) {
+                $totalProductsInCart += $cart->cartItems()->count();
+            }
         } else {
             $totalProductsInCart = 0;
         }
@@ -37,8 +40,11 @@ class HomeController extends Controller
            
         $user = Auth::user();
 
-        if ($user && $user->cart) {
-            $totalProductsInCart = $user->cart->items()->count('quantity');
+        if ($user && $user->carts) {
+            $totalProductsInCart = 0;
+            foreach ($user->carts as $cart) {
+                $totalProductsInCart += $cart->cartItems()->count();
+            }
         } else {
             $totalProductsInCart = 0;
         }
@@ -48,11 +54,4 @@ class HomeController extends Controller
         $product = Product::find($id);
         return view('home.detail', compact('product', 'products', 'categories', 'totalProductsInCart'));
     }
-
-    // public function search(Request $request){
-    //     $keyword = $request->input('keyword');
-    //     if($keyword){
-    //         $products = Product::find($keyword);
-    //     }
-    // }
 }

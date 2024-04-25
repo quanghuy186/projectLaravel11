@@ -14,7 +14,6 @@
                 /* height: auto; */
             }
 
-
         .carousel-item img {
             filter: brightness(70%) contrast(120%);
         }
@@ -91,7 +90,7 @@
                 href="{{ route('home.detail', $product->id) }}"
                 class="btn btn-outline-danger btn-sm mt-3"
                 class="add-to-cart"
-                >Chi tiết</a
+                >xem chi tiết</a
               >
               <form action="{{ route('cart.add') }}" method="POST" class="">
                 @csrf
